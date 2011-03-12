@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
 using Lazybones.Media;
@@ -16,6 +17,8 @@ namespace Lazybones
 			InitializeComponent();
 			InitialiseTimer();
 			InitialiseUI();
+
+			Closing += WindowClosingEventHandler;
 		}
 
 		private void InitialiseTimer()
@@ -76,6 +79,12 @@ namespace Lazybones
 		private void PlayTimeFinishedEventHandler(object sender, EventArgs e)
 		{
 			AudioPlayer.PlayPlayTimeOverNotificationTrack();
+		}
+
+		private void WindowClosingEventHandler(object sender, CancelEventArgs e)
+		{
+			e.Cancel = true;
+			WindowState = WindowState.Minimized;
 		}
 	}
 }

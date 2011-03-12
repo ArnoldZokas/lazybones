@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:Lazybones="clr-namespace:Lazybones.UI"
-		Title="Lazybones"
+		ResizeMode="NoResize"
 		SizeToContent="WidthAndHeight"
-		ResizeMode="NoResize">
+		Title="Lazybones">
 	<WrapPanel Width="300">
 		<Lazybones:PushButton x:Name="ImWorkingButton" Height="50" Width="100">I'm Working</Lazybones:PushButton>
 		<Lazybones:PushButton x:Name="ImRestingButton" Height="50" Width="100" IsEnabled="False">I'm Resting</Lazybones:PushButton>
