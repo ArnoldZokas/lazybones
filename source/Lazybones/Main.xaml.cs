@@ -1,17 +1,33 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Lazybones.Utils;
+﻿using System.Threading;
 using System.Windows;
+using Lazybones.Utils;
 
 namespace Lazybones
 {
 	public partial class Main
 	{
+		private TimerMode _timerMode;
+
 		public Main()
 		{
 			InitializeComponent();
+			InitialiseTimer();
 			InitialiseUI();
+		}
+
+		private void InitialiseTimer()
+		{
+			_timerMode = TimerMode.Rest;
+
+			TimerCallback timerCallback = state =>
+			                  	{
+			                  		if (_timerMode == TimerMode.Work)
+			                  		{
+			                  			TimerDisplay.Invoke(x => x.Increment());
+			                  		}
+			                  	};
+
+			new Timer(timerCallback, null, 0, 1000);
 		}
 
 		private void InitialiseUI()
@@ -22,6 +38,7 @@ namespace Lazybones
 
 			ImRestingButton.AssociatedButtons.Add(ImWorkingButton);
 			ImRestingButton.AssociatedButtons.Add(ImPlayingButton);
+			ImRestingButton.Click += ImRestingButtonClickEventHandler;
 
 			ImPlayingButton.AssociatedButtons.Add(ImWorkingButton);
 			ImPlayingButton.AssociatedButtons.Add(ImRestingButton);
@@ -29,17 +46,12 @@ namespace Lazybones
 
 		private void ImWorkingButtonClickEventHandler(object sender, RoutedEventArgs e)
 		{
-			var token = new CancellationToken();
-			var task = new Task(() =>
-			                    	{
-			                    		while (!token.IsCancellationRequested)
-			                    		{
-			                    			Thread.Sleep(1000);
-			                    			TimerDisplay.Invoke(x => x.Increment());
-			                    		}
-			                    	}, token);
+			_timerMode = TimerMode.Work;
+		}
 
-			task.Start();
+		private void ImRestingButtonClickEventHandler(object sender, RoutedEventArgs e)
+		{
+			_timerMode = TimerMode.Rest;
 		}
 	}
 }

@@ -51,6 +51,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Media\AudioPlayer.cs" />
+    <Compile Include="TimerMode.cs" />
     <Compile Include="UI\PushButton.cs" />
     <Compile Include="UI\TimerDisplay.cs" />
     <Compile Include="Utils\FrameworkElementExtensions.cs" />

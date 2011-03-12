@@ -22,10 +22,19 @@ namespace Lazybones.UI
 			base.OnInitialized(e);
 		}
 
+		public void ResetWorkTimer()
+		{
+			WorkTime = new TimeSpan();
+
+			UpdateUI();
+		}
+
 		public void Increment()
 		{
 			WorkTime += _oneSecondInterval;
-			PlayTime = new TimeSpan(0, 0, (int)(WorkTime.TotalSeconds/_applicationSettings.WorkToPlayTimeRatio));
+
+			if (WorkTime.TotalSeconds % _applicationSettings.WorkToPlayTimeRatio == 0)
+				PlayTime += _oneSecondInterval;
 
 			UpdateUI();
 		}
