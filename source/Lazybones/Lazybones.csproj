@@ -50,6 +50,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Media\AudioPlayer.cs" />
+    <Compile Include="UI\PushButton.cs" />
+    <Compile Include="Utils\IEnumerableExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.xaml.cs">

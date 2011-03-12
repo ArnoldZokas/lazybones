@@ -1,8 +1,14 @@
 ﻿<Window x:Class="Lazybones.Main"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Main" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+		xmlns:Lazybones="clr-namespace:Lazybones.UI"
+		Title="Lazybones"
+		SizeToContent="WidthAndHeight">
+	<WrapPanel Width="300">
+		<Lazybones:PushButton x:Name="ImWorkingButton" Height="50" Width="100">I'm Working</Lazybones:PushButton>
+		<Lazybones:PushButton x:Name="ImRestingButton" Height="50" Width="100">I'm Resting</Lazybones:PushButton>
+		<Lazybones:PushButton x:Name="ImPlayingButton" Height="50" Width="100">I'm Playing</Lazybones:PushButton>
+		<TextBlock x:Name="WorkHourDisplay" FontSize="36" Width="150" TextAlignment="Center">00:00:00</TextBlock>
+		<TextBlock x:Name="PlayHourDisplay" FontSize="36" Width="150" TextAlignment="Center" Foreground="Red">00:00:00</TextBlock>
+	</WrapPanel>
 </Window>
