@@ -7,7 +7,7 @@
 		ResizeMode="NoResize">
 	<WrapPanel Width="300">
 		<Lazybones:PushButton x:Name="ImWorkingButton" Height="50" Width="100">I'm Working</Lazybones:PushButton>
-		<Lazybones:PushButton x:Name="ImRestingButton" Height="50" Width="100">I'm Resting</Lazybones:PushButton>
+		<Lazybones:PushButton x:Name="ImRestingButton" Height="50" Width="100" IsEnabled="False">I'm Resting</Lazybones:PushButton>
 		<Lazybones:PushButton x:Name="ImPlayingButton" Height="50" Width="100">I'm Playing</Lazybones:PushButton>
 		<Lazybones:TimerDisplay x:Name="TimerDisplay">
 			<TextBlock x:Name="WorkHourDisplay" FontSize="36" Width="150" TextAlignment="Center" Foreground="Red">00:00:00</TextBlock>
