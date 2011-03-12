@@ -31,10 +31,11 @@ namespace Lazybones
 			var exitTask = new JumpTask();
 			exitTask.Title = "Exit Lazybones";
 			exitTask.Description = "Exits Lazybones application";
+			exitTask.Arguments = "/q";
+			exitTask.IconResourceIndex = -1;
 			var entryAssembly = Assembly.GetEntryAssembly();
 			exitTask.ApplicationPath = entryAssembly.Location;
-			exitTask.Arguments = "/q";
-            tasks.JumpItems.Add(exitTask);
+			tasks.JumpItems.Add(exitTask);
 
 			tasks.Apply();
 			JumpList.SetJumpList(Application.Current, tasks);
