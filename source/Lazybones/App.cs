@@ -26,6 +26,12 @@ namespace Lazybones
 				case CommandLineCodes.IAmWorking:
 					Main.SwitchToWorkMode();
 					break;
+				case CommandLineCodes.IAmResting:
+					Main.SwitchToRestMode();
+					break;
+				case CommandLineCodes.IAmPlaying:
+					Main.SwitchToPlayMode();
+					break;
 			}
 		}
 

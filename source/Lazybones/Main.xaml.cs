@@ -12,6 +12,8 @@ namespace Lazybones
 	public partial class Main
 	{
 		private static Action _workModeActivator;
+		private static Action _restModeActivator;
+		private static Action _playModeActivator;
 		private readonly TimeSpan _oneSecond = new TimeSpan(0, 0, 1);
 		private TimerMode _timerMode;
 
@@ -34,12 +36,32 @@ namespace Lazybones
 			// "I am... Working"
 			var workModeSwitchTask = new JumpTask();
 			workModeSwitchTask.Title = "Working";
-			workModeSwitchTask.Description = "Switch 'Work' mode";
+			workModeSwitchTask.Description = "Switch to 'Work' mode";
 			workModeSwitchTask.IconResourceIndex = -1;
 			workModeSwitchTask.CustomCategory = "I am...";
 			workModeSwitchTask.ApplicationPath = applicationPath;
-			workModeSwitchTask.Arguments = "/working";
+			workModeSwitchTask.Arguments = CommandLineCodes.IAmWorking;
 			jumpList.JumpItems.Add(workModeSwitchTask);
+
+			// "I am... Resting"
+			var restModeSwitchTask = new JumpTask();
+			restModeSwitchTask.Title = "Resting";
+			restModeSwitchTask.Description = "Switch to 'Rest' mode";
+			restModeSwitchTask.IconResourceIndex = -1;
+			restModeSwitchTask.CustomCategory = "I am...";
+			restModeSwitchTask.ApplicationPath = applicationPath;
+			restModeSwitchTask.Arguments = CommandLineCodes.IAmResting;
+			jumpList.JumpItems.Add(restModeSwitchTask);
+
+			// "I am... Playing"
+			var playModeSwitchTask = new JumpTask();
+			playModeSwitchTask.Title = "Playing";
+			playModeSwitchTask.Description = "Switch to 'Play' mode";
+			playModeSwitchTask.IconResourceIndex = -1;
+			playModeSwitchTask.CustomCategory = "I am...";
+			playModeSwitchTask.ApplicationPath = applicationPath;
+			playModeSwitchTask.Arguments = CommandLineCodes.IAmPlaying;
+			jumpList.JumpItems.Add(playModeSwitchTask);
 
 			// "Exit"
 			var exitTask = new JumpTask();
@@ -85,10 +107,12 @@ namespace Lazybones
 			ImRestingButton.AssociatedButtons.Add(ImWorkingButton);
 			ImRestingButton.AssociatedButtons.Add(ImPlayingButton);
 			ImRestingButton.Click += ImRestingButtonClickEventHandler;
+			_restModeActivator = () => ImRestingButton.Activate();
 
 			ImPlayingButton.AssociatedButtons.Add(ImWorkingButton);
 			ImPlayingButton.AssociatedButtons.Add(ImRestingButton);
 			ImPlayingButton.Click += ImPlayingButtonClickEventHandler;
+			_playModeActivator = () => ImPlayingButton.Activate();
 
 			TimerDisplay.PlayTimeFinished += PlayTimeFinishedEventHandler;
 		}
@@ -124,6 +148,16 @@ namespace Lazybones
 		public static void SwitchToWorkMode()
 		{
 			_workModeActivator();
+		}
+
+		public static void SwitchToRestMode()
+		{
+			_restModeActivator();
+		}
+
+		public static void SwitchToPlayMode()
+		{
+			_playModeActivator();
 		}
 	}
 }
