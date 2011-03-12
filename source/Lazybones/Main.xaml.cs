@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Lazybones.Utils;
 using System.Windows;
 
 namespace Lazybones
@@ -34,7 +35,7 @@ namespace Lazybones
 			                    		while (!token.IsCancellationRequested)
 			                    		{
 			                    			Thread.Sleep(1000);
-			                    			Dispatcher.Invoke(new Action(TimerDisplay.Increment));
+			                    			TimerDisplay.Invoke(x => x.Increment());
 			                    		}
 			                    	}, token);
 

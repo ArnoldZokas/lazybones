@@ -53,6 +53,7 @@
     <Compile Include="Media\AudioPlayer.cs" />
     <Compile Include="UI\PushButton.cs" />
     <Compile Include="UI\TimerDisplay.cs" />
+    <Compile Include="Utils\FrameworkElementExtensions.cs" />
     <Compile Include="Utils\IEnumerableExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
