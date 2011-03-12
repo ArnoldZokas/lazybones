@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="Media\AudioPlayer.cs" />
     <Compile Include="UI\PushButton.cs" />
+    <Compile Include="UI\TimerDisplay.cs" />
     <Compile Include="Utils\IEnumerableExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +76,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
