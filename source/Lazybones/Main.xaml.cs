@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Reflection;
 using System.Windows;
+using System.Windows.Shell;
 using System.Windows.Threading;
 using Lazybones.Media;
 using Lazybones.Utils;
@@ -17,8 +19,25 @@ namespace Lazybones
 			InitializeComponent();
 			InitialiseTimer();
 			InitialiseUI();
+			InitialiseJumpList();
 
 			Closing += WindowClosingEventHandler;
+		}
+
+		private static void InitialiseJumpList()
+		{
+			var tasks = new JumpList();
+			
+			var exitTask = new JumpTask();
+			exitTask.Title = "Exit Lazybones";
+			exitTask.Description = "Exits Lazybones application";
+			var entryAssembly = Assembly.GetEntryAssembly();
+			exitTask.ApplicationPath = entryAssembly.Location;
+			exitTask.Arguments = "/q";
+            tasks.JumpItems.Add(exitTask);
+
+			tasks.Apply();
+			JumpList.SetJumpList(Application.Current, tasks);
 		}
 
 		private void InitialiseTimer()

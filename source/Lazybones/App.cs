@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Windows;
 
 namespace Lazybones
@@ -16,6 +17,11 @@ namespace Lazybones
 
 		public void ProcessArgs(string[] args, bool firstInstance)
 		{
+			if (args.Length == 0)
+				return;
+
+			if (args.First().ToLowerInvariant() == CommandLineCodes.Exit)
+				Shutdown();
 		}
 
 		public void ActivateMainWindow()
