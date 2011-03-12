@@ -21,7 +21,7 @@ namespace Lazybones.UI
 			AssociatedButtons.Where(button => button != this).Apply(button => button.IsEnabled = true);
 
 			IsEnabled = false;
-			AudioPlayer.PlayNotificationTrack();
+			AudioPlayer.PlayModeChangeNotificationTrack();
 
 			base.OnClick();
 		}

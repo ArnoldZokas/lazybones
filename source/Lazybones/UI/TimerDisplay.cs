@@ -33,8 +33,22 @@ namespace Lazybones.UI
 		{
 			WorkTime += _oneSecondInterval;
 
-			if (WorkTime.TotalSeconds % _applicationSettings.WorkToPlayTimeRatio == 0)
+			if (WorkTime.TotalSeconds%_applicationSettings.WorkToPlayTimeRatio == 0)
 				PlayTime += _oneSecondInterval;
+
+			UpdateUI();
+		}
+
+		public void Decrement()
+		{
+			if (PlayTime.TotalSeconds == 0)
+			{
+				OnPlayTimeFinished(EventArgs.Empty);
+			}
+			else
+			{
+				PlayTime -= _oneSecondInterval;
+			}
 
 			UpdateUI();
 		}
@@ -43,6 +57,14 @@ namespace Lazybones.UI
 		{
 			_workHourDisplay.Text = string.Format(Properties.Resources.TimerFormatString, WorkTime);
 			_playHourDisplay.Text = string.Format(Properties.Resources.TimerFormatString, PlayTime);
+		}
+
+		public event EventHandler<EventArgs> PlayTimeFinished;
+
+		private void OnPlayTimeFinished(EventArgs e)
+		{
+			if (PlayTimeFinished != null)
+				PlayTimeFinished(this, e);
 		}
 	}
 }

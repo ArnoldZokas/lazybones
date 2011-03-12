@@ -1,11 +1,14 @@
-﻿using System.Threading;
+﻿using System;
 using System.Windows;
+using System.Windows.Threading;
+using Lazybones.Media;
 using Lazybones.Utils;
 
 namespace Lazybones
 {
 	public partial class Main
 	{
+		private readonly TimeSpan _oneSecond = new TimeSpan(0, 0, 1);
 		private TimerMode _timerMode;
 
 		public Main()
@@ -19,15 +22,21 @@ namespace Lazybones
 		{
 			_timerMode = TimerMode.Rest;
 
-			TimerCallback timerCallback = state =>
-			                  	{
-			                  		if (_timerMode == TimerMode.Work)
-			                  		{
-			                  			TimerDisplay.Invoke(x => x.Increment());
-			                  		}
-			                  	};
-
-			new Timer(timerCallback, null, 0, 1000);
+			var timer = new DispatcherTimer();
+			timer.Interval = _oneSecond;
+			timer.Tick += (sender, e) =>
+			              	{
+			              		switch (_timerMode)
+			              		{
+			              			case TimerMode.Work:
+			              				TimerDisplay.Invoke(x => x.Increment());
+			              				break;
+			              			case TimerMode.Play:
+			              				TimerDisplay.Invoke(x => x.Decrement());
+			              				break;
+			              		}
+			              	};
+			timer.Start();
 		}
 
 		private void InitialiseUI()
@@ -42,6 +51,9 @@ namespace Lazybones
 
 			ImPlayingButton.AssociatedButtons.Add(ImWorkingButton);
 			ImPlayingButton.AssociatedButtons.Add(ImRestingButton);
+			ImPlayingButton.Click += ImPlayingButtonClickEventHandler;
+
+			TimerDisplay.PlayTimeFinished += PlayTimeFinishedEventHandler;
 		}
 
 		private void ImWorkingButtonClickEventHandler(object sender, RoutedEventArgs e)
@@ -52,6 +64,18 @@ namespace Lazybones
 		private void ImRestingButtonClickEventHandler(object sender, RoutedEventArgs e)
 		{
 			_timerMode = TimerMode.Rest;
+			TimerDisplay.Invoke(x => x.ResetWorkTimer());
+		}
+
+		private void ImPlayingButtonClickEventHandler(object sender, RoutedEventArgs e)
+		{
+			_timerMode = TimerMode.Play;
+			TimerDisplay.Invoke(x => x.ResetWorkTimer());
+		}
+
+		private void PlayTimeFinishedEventHandler(object sender, EventArgs e)
+		{
+			AudioPlayer.PlayPlayTimeOverNotificationTrack();
 		}
 	}
 }
