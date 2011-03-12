@@ -119,23 +119,31 @@ namespace Lazybones
 
 		private void ImWorkingButtonClickEventHandler(object sender, RoutedEventArgs e)
 		{
+			TaskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
+			TaskbarItemInfo.ProgressValue = 0;
 			_timerMode = TimerMode.Work;
 		}
 
 		private void ImRestingButtonClickEventHandler(object sender, RoutedEventArgs e)
 		{
+			TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
+			TaskbarItemInfo.ProgressValue = 0;
 			_timerMode = TimerMode.Rest;
 			TimerDisplay.Invoke(x => x.ResetWorkTimer());
 		}
 
 		private void ImPlayingButtonClickEventHandler(object sender, RoutedEventArgs e)
 		{
+			TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
+			TaskbarItemInfo.ProgressValue = 0;
 			_timerMode = TimerMode.Play;
 			TimerDisplay.Invoke(x => x.ResetWorkTimer());
 		}
 
 		private void PlayTimeFinishedEventHandler(object sender, EventArgs e)
 		{
+			TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Error;
+			TaskbarItemInfo.ProgressValue = 100;
 			AudioPlayer.PlayPlayTimeOverNotificationTrack();
 		}
 

@@ -5,6 +5,9 @@
 		ResizeMode="NoResize"
 		SizeToContent="WidthAndHeight"
 		Title="Lazybones">
+	<Window.TaskbarItemInfo>
+		<TaskbarItemInfo />
+	</Window.TaskbarItemInfo>
 	<WrapPanel Width="300">
 		<Lazybones:PushButton x:Name="ImWorkingButton" Height="50" Width="100">I'm Working</Lazybones:PushButton>
 		<Lazybones:PushButton x:Name="ImRestingButton" Height="50" Width="100" IsEnabled="False">I'm Resting</Lazybones:PushButton>
