@@ -7,17 +7,17 @@ namespace Lazybones
 	{
 		protected override void OnStartup(StartupEventArgs e)
 		{
-			ProcessArgs(e.Args, true);
-
 			MainWindow = new Main();
 			MainWindow.Show();
+
+			ProcessArgs(e.Args, true);
 		}
 
 		public void ProcessArgs(string[] args, bool firstInstance)
 		{
 			if (args.Length == 0)
 				return;
-
+			
 			switch (args.First().ToLowerInvariant())
 			{
 				case CommandLineCodes.Exit:

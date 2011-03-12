@@ -115,6 +115,8 @@ namespace Lazybones
 			_playModeActivator = () => ImPlayingButton.Activate();
 
 			TimerDisplay.PlayTimeFinished += PlayTimeFinishedEventHandler;
+
+			_restModeActivator();
 		}
 
 		private void ImWorkingButtonClickEventHandler(object sender, RoutedEventArgs e)
