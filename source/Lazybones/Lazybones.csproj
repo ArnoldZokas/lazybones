@@ -40,7 +40,11 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\Icons\clock.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Icons\Lazybones.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
@@ -90,23 +94,32 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.WindowsAPICodePack">
-      <HintPath>..\packages\Windows7APICodePack.1.0.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\clock.ico" />
+    <None Include="Resources\Icons\Lazybones.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!--<ItemGroup>
+		<Win32RCFile Include="Win32Resources.rc" />
+	</ItemGroup>
+	<PropertyGroup>
+		<CoreCompileDependsOn>$(CoreCompileDependsOn);CompileWin32RCFile</CoreCompileDependsOn>
+	</PropertyGroup>
+	<Target Name="CompileWin32RCFile" Outputs="@(Win32RCFile->'%(filename).res')">
+		<Exec Command="rc.exe /r /fo @(Win32RCFile) @(Win32RCFile->'%(filename).res')" />
+		
+	</Target>-->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
-  </Target>
+		
+	</Target>
   <Target Name="AfterBuild">
   </Target>
   -->

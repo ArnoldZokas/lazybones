@@ -11,6 +11,7 @@ namespace Lazybones
 {
 	public partial class Main
 	{
+		private static Action _workModeActivator;
 		private readonly TimeSpan _oneSecond = new TimeSpan(0, 0, 1);
 		private TimerMode _timerMode;
 
@@ -26,19 +27,31 @@ namespace Lazybones
 
 		private static void InitialiseJumpList()
 		{
-			var tasks = new JumpList();
-			
-			var exitTask = new JumpTask();
-			exitTask.Title = "Exit Lazybones";
-			exitTask.Description = "Exits Lazybones application";
-			exitTask.Arguments = "/q";
-			exitTask.IconResourceIndex = -1;
 			var entryAssembly = Assembly.GetEntryAssembly();
-			exitTask.ApplicationPath = entryAssembly.Location;
-			tasks.JumpItems.Add(exitTask);
+			var applicationPath = entryAssembly.Location;
+			var jumpList = new JumpList();
 
-			tasks.Apply();
-			JumpList.SetJumpList(Application.Current, tasks);
+			// "I am... Working"
+			var workModeSwitchTask = new JumpTask();
+			workModeSwitchTask.Title = "Working";
+			workModeSwitchTask.Description = "Switch 'Work' mode";
+			workModeSwitchTask.IconResourceIndex = -1;
+			workModeSwitchTask.CustomCategory = "I am...";
+			workModeSwitchTask.ApplicationPath = applicationPath;
+			workModeSwitchTask.Arguments = "/working";
+			jumpList.JumpItems.Add(workModeSwitchTask);
+
+			// "Exit"
+			var exitTask = new JumpTask();
+			exitTask.Title = "Exit";
+			exitTask.Description = "Exit Lazybones";
+			exitTask.IconResourceIndex = -1;
+			exitTask.ApplicationPath = applicationPath;
+			exitTask.Arguments = "/q";
+			jumpList.JumpItems.Add(exitTask);
+
+			jumpList.Apply();
+			JumpList.SetJumpList(Application.Current, jumpList);
 		}
 
 		private void InitialiseTimer()
@@ -67,6 +80,7 @@ namespace Lazybones
 			ImWorkingButton.AssociatedButtons.Add(ImRestingButton);
 			ImWorkingButton.AssociatedButtons.Add(ImPlayingButton);
 			ImWorkingButton.Click += ImWorkingButtonClickEventHandler;
+			_workModeActivator = () => ImWorkingButton.Activate();
 
 			ImRestingButton.AssociatedButtons.Add(ImWorkingButton);
 			ImRestingButton.AssociatedButtons.Add(ImPlayingButton);
@@ -105,6 +119,11 @@ namespace Lazybones
 		{
 			e.Cancel = true;
 			WindowState = WindowState.Minimized;
+		}
+
+		public static void SwitchToWorkMode()
+		{
+			_workModeActivator();
 		}
 	}
 }

@@ -25,5 +25,10 @@ namespace Lazybones.UI
 
 			base.OnClick();
 		}
+
+		public void Activate()
+		{
+			OnClick();
+		}
 	}
 }

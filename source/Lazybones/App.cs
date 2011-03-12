@@ -5,8 +5,6 @@ namespace Lazybones
 {
 	public class App : Application
 	{
-		public Main MyWindow { get; private set; }
-
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			ProcessArgs(e.Args, true);
@@ -20,8 +18,15 @@ namespace Lazybones
 			if (args.Length == 0)
 				return;
 
-			if (args.First().ToLowerInvariant() == CommandLineCodes.Exit)
-				Shutdown();
+			switch (args.First().ToLowerInvariant())
+			{
+				case CommandLineCodes.Exit:
+					Shutdown();
+					break;
+				case CommandLineCodes.IAmWorking:
+					Main.SwitchToWorkMode();
+					break;
+			}
 		}
 
 		public void ActivateMainWindow()
