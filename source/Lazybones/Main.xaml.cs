@@ -131,7 +131,6 @@ namespace Lazybones
 			TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
 			TaskbarItemInfo.ProgressValue = 0;
 			_timerMode = TimerMode.Rest;
-			TimerDisplay.Invoke(x => x.ResetWorkTimer());
 		}
 
 		private void ImPlayingButtonClickEventHandler(object sender, RoutedEventArgs e)
